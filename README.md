@@ -13,6 +13,9 @@ Code, Explained. turns a small C++ file into patient English:
 The submitted C++ is syntax-checked with Clang but never compiled into an
 executable or run.
 
+See [docs/DEMO.md](docs/DEMO.md) for a complete example of the code a user can
+paste and the explanation they will receive.
+
 ## Local development
 
 Requirements:
