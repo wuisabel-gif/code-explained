@@ -2,9 +2,15 @@
 
 [Open the site](https://wuisabel-gif.github.io/code-explained/)
 
-When I learn programming, I open this. I paste a little C++ and try to get a coherent story back.
+When I learn programming, I open this. I paste or upload a little C++ and try to get a coherent story back.
 
 Alice is the action. Bobo is memory. Each sentence stays tied to the lines it explains.
+
+**Why bother.** Syntax without a plot is a wall. I wanted the next page: what is this function actually doing.
+
+**Why upload C++.** The homework file is already on disk. The site takes a `.cpp` upload so I do not have to retype it.
+
+**OpenAI, inside the page.** I embedded the OpenAI API in the website. A live read sends the code through that API and maps each sentence back to the source. The code is checked, never compiled, never run.
 
 ![The record hunt: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
 
