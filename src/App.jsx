@@ -16,6 +16,23 @@ function meaningfulLineCount(code) {
   }).length;
 }
 
+function BrandMark() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="brandmark"
+      fill="none"
+      viewBox="0 0 200 200"
+    >
+      <rect x="21" y="51" width="22" height="107" rx="11" fill="#2348a1" />
+      <rect x="55" y="96" width="22" height="62" rx="11" fill="#2348a1" />
+      <rect x="89" y="38" width="22" height="120" rx="11" fill="#2348a1" />
+      <rect x="123" y="68" width="22" height="90" rx="11" fill="#db332c" />
+      <rect x="157" y="108" width="22" height="50" rx="11" fill="#2348a1" />
+    </svg>
+  );
+}
+
 function CodeEditor({
   code,
   onChange,
@@ -47,6 +64,13 @@ function CodeEditor({
       </div>
 
       <div className="editor-frame">
+        <div className="editor-chrome" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <span>source.cpp</span>
+        </div>
+        <div className="editor-body">
         <div className="gutter-window" aria-hidden="true">
           <div className="gutter-lines" ref={gutterRef}>
             {lines.map((_, index) => (
@@ -87,6 +111,7 @@ function CodeEditor({
             spellCheck="false"
             value={code}
           />
+        </div>
         </div>
       </div>
 
@@ -252,7 +277,12 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Code, Explained home">
+        <a
+          className="brand"
+          href={import.meta.env.BASE_URL}
+          aria-label="Code, Explained home"
+        >
+          <BrandMark />
           Code, Explained.
         </a>
         <span className="header-chip">C++</span>
@@ -268,26 +298,61 @@ export default function App() {
 
       <main>
         <div className="intro">
+          <p className="eyebrow">explain · cpp · line by line</p>
           <h1>Paste C++. Get the story.</h1>
-          <p>Every one or two lines, explained in one clear sentence.</p>
+          <p className="lede">
+            Every one or two lines, explained in one clear sentence. Click a
+            sentence to light up the code it belongs to.
+          </p>
+          <ul className="intro-points">
+            <li>
+              <b>Summary first.</b> One short reading of the whole program.
+            </li>
+            <li>
+              <b>Mapped lines.</b> Each sentence points at the source.
+            </li>
+            <li>
+              <b>Checked, not run.</b> Clang looks at syntax. Nothing executes.
+            </li>
+          </ul>
         </div>
 
-        <div className="workspace">
-          <CodeEditor
-            code={code}
-            error={error}
-            errorLines={errorLines}
-            isLoading={isLoading}
-            onChange={handleCodeChange}
-            onExplain={explainCode}
-            selectedLines={selectedLines}
-          />
-          <ExplanationRail
-            isLoading={isLoading}
-            onSelect={selectExplanation}
-            result={result}
-            selectedId={selectedId}
-          />
+        <div className="readout">
+          <div className="readout-head">
+            <span className="file">source.cpp</span>
+            <span className={count > 100 ? "count-chip over-limit" : "count-chip"}>
+              {count} / 100 lines
+            </span>
+            <span className="state">
+              <span
+                className={
+                  result?.provider && result.provider !== "preview"
+                    ? "tdot live"
+                    : "tdot preview"
+                }
+              />
+              {result?.provider === "preview" || !result
+                ? "preview"
+                : result?.provider || "ready"}
+            </span>
+          </div>
+          <div className="workspace">
+            <CodeEditor
+              code={code}
+              error={error}
+              errorLines={errorLines}
+              isLoading={isLoading}
+              onChange={handleCodeChange}
+              onExplain={explainCode}
+              selectedLines={selectedLines}
+            />
+            <ExplanationRail
+              isLoading={isLoading}
+              onSelect={selectExplanation}
+              result={result}
+              selectedId={selectedId}
+            />
+          </div>
         </div>
       </main>
 
