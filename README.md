@@ -2,33 +2,54 @@
 
 [Open the site](https://wuisabel-gif.github.io/code-explained/)
 
-Paste a little C++. Get a story back.
+When I learn programming, I open this. I paste a little C++ and try to get a coherent story back.
 
-Code, Explained. is for people who just started programming. It reads a short C++ program the way a novel reads a scene: Alice is the action, Bobo is memory, and every sentence points at the lines it belongs to.
+Alice is the action. Bobo is memory. Each sentence stays tied to the lines it explains.
 
-## What you get
+![The record hunt: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
 
-- A one-sentence plot of the whole program
-- One story beat for every one or two meaningful lines
-- Click a sentence, and those lines light up
-- Friendly notes when the C++ still needs a small syntax fix
-- Your code is checked, never compiled, never run
+## The words it produces
 
-## Try a scene
+**The record hunt**
 
-The site already has a few short chapters:
+```cpp
+int findLargest(const std::vector<int>& numbers) {
+    int largest = numbers[0];
+    for (int number : numbers) {
+        if (number > largest) {
+            largest = number;
+        }
+    }
+    return largest;
+}
+```
 
-- **The record hunt** — walk a list and keep the biggest score
-- **The trade** — swap two values without dropping either one
-- **The fork** — an `if` that chooses Alice or Bobo
-- **The counter** — a loop that tallies high-fives
-- **Opening scene** — `main` prints a wave and finishes
+> This is a record hunt: Alice walks Bobo's locker of numbers, and Bobo keeps only the champion score in memory.
 
-Or paste your own homework snippet and press **Read this code**.
+A `for` loop sends Alice through every number, and the `if` asks whether this challenger is bigger than Bobo's sticky note.
 
-## How to read it
+**The trade**
 
-Think of a function as a chapter, a loop as a repeating beat, and `return` as the last page. The left side is the source. The right side is the story. They stay linked.
+```cpp
+void swapValues(int& alice, int& bobo) {
+    int cup = alice;
+    alice = bobo;
+    bobo = cup;
+}
+```
+
+> This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
+
+**Opening scene**
+
+```cpp
+int main() {
+    std::cout << "Alice waves at Bobo.\n";
+    return 0;
+}
+```
+
+> This is the opening scene of a C++ program: main starts, Alice prints a wave, and the process exits cleanly.
 
 ## License
 

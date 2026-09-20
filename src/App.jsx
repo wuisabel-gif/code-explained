@@ -318,12 +318,12 @@ export default function App() {
 
       <main>
         <div className="intro">
-          <p className="eyebrow">lab notes · first-year c++ · story mode</p>
-          <h1>Read C++ like a novel.</h1>
+          <p className="eyebrow">when I learn programming</p>
+          <h1>I open this for a coherent story.</h1>
           <p className="lede">
-            Built for people who just started programming. Alice is the action.
-            Bobo is memory. Each function is a scene, each loop a repeating
-            beat, each return the last page.
+            I paste a little C++ and read it back as a scene. Alice is the
+            action. Bobo is memory. Each sentence stays tied to the lines it
+            explains.
           </p>
           <ul className="intro-points">
             <li>
