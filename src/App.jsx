@@ -255,6 +255,7 @@ export default function App() {
         <a className="brand" href="/" aria-label="Code, Explained home">
           Code, Explained.
         </a>
+        <span className="header-chip">C++</span>
       </header>
 
       <main>
