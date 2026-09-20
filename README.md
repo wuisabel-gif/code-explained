@@ -6,11 +6,11 @@ Your code is already in your hands: lines you typed, syntax that is hard to reme
 
 Paste or upload any code you have: Alice is the action. Bobo is memory. Each sentence stays tied to the lines it explains. The words are plain, like a story you could read to a child.
 
-**Why bother.** Syntax without a plot is hard to remember. A scene you can follow makes the function easier to learn.
+**Why bother.** Syntax without a plot is hard to remember, and a story you can follow makes the function easier to learn.
 
 **Why upload.** It can be any code you have. Drop the file instead of retyping it.
 
-**OpenAI, inside the page.** The site embeds the OpenAI API, so a live read sends your code through that API and maps each sentence back to the source. The code is never compiled and never run. C and C++ are syntax-checked first.
+**OpenAI, inside the page.** A live read sends your code to the embedded OpenAI API and maps each sentence back to the source.
 
 ![Example 1: code on the left, the story on the right](docs/screenshots/record-hunt.png)
 

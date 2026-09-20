@@ -3,7 +3,6 @@ import { highlightLine } from "./codeHighlight.jsx";
 import {
   defaultFilename,
   detectLanguage,
-  languageLabel,
   uploadAccept,
 } from "./language.js";
 import { examples } from "./sample.js";
@@ -353,7 +352,6 @@ export default function App() {
           <BrandMark />
           Code, Explained.
         </a>
-        <span className="header-chip">{languageLabel(language)}</span>
         <a
           className="header-github"
           href="https://github.com/wuisabel-gif/code-explained"
@@ -373,20 +371,6 @@ export default function App() {
             is the action, Bobo is memory, and OpenAI is built into the site so
             each sentence maps to the lines it explains.
           </p>
-          <ul className="intro-points">
-            <li>
-              <b>Why bother.</b> Syntax without a plot is hard to remember, and
-              a story you can follow makes the function easier to learn.
-            </li>
-            <li>
-              <b>Why upload.</b> It can be any code you have. Drop the file
-              instead of retyping it.
-            </li>
-            <li>
-              <b>OpenAI, inside the page.</b> A live read sends your code to the
-              embedded OpenAI API and maps each sentence back to the source.
-            </li>
-          </ul>
         </div>
 
         <div className="example-row" aria-label="Example scenes">
