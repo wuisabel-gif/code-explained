@@ -33,10 +33,11 @@ curl https://code-explained-api.onrender.com/api/health
 
 ## 2. Configure the frontend origin in Render
 
-Set `FRONTEND_ORIGIN` to the GitHub Pages URL:
+Set `FRONTEND_ORIGIN` to the GitHub Pages origin. Do not include the
+repository path, because browsers omit paths from the `Origin` header:
 
 ```text
-https://wuisabel-gif.github.io/code-explained
+https://wuisabel-gif.github.io
 ```
 
 Render automatically redeploys the service after the environment variable is
