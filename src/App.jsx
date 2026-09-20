@@ -2,6 +2,8 @@ import { useMemo, useRef, useState } from "react";
 import { highlightLine } from "./codeHighlight.jsx";
 import { sampleCode, sampleExplanation } from "./sample.js";
 
+const apiBaseUrl = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+
 function lineLabel(lineNumbers) {
   if (lineNumbers.length === 1) return `Line ${lineNumbers[0]}`;
   return `Lines ${lineNumbers[0]}–${lineNumbers.at(-1)}`;
@@ -211,7 +213,7 @@ export default function App() {
     setSelectedLines([]);
 
     try {
-      const response = await fetch("/api/explain", {
+      const response = await fetch(`${apiBaseUrl}/api/explain`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, language: "cpp" }),

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: code-explained-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: AI_PROVIDER
+        value: openai
+      - key: OPENAI_MODEL
+        value: gpt-5.6-luna
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash
+      - key: MAX_MEANINGFUL_LINES
+        value: "100"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false

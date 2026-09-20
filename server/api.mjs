@@ -4,6 +4,22 @@ import { requestExplanation } from "./providers.mjs";
 
 const maxBodyBytes = 100_000;
 
+function setCorsHeaders(request, response) {
+  const configuredOrigin = process.env.FRONTEND_ORIGIN || "*";
+  const requestOrigin = request.headers.origin;
+  const allowedOrigin =
+    configuredOrigin === "*" || configuredOrigin === requestOrigin
+      ? configuredOrigin
+      : null;
+
+  if (allowedOrigin) {
+    response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  }
+  response.setHeader("Vary", "Origin");
+  response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
 function sendJson(response, status, value) {
   response.statusCode = status;
   response.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -35,6 +51,14 @@ function readJson(request) {
 }
 
 export async function handleApiRequest(request, response, prefix = "") {
+  setCorsHeaders(request, response);
+
+  if (request.method === "OPTIONS") {
+    response.statusCode = 204;
+    response.end();
+    return;
+  }
+
   const pathname = new URL(request.url || "/", "http://localhost").pathname;
   const route = pathname.startsWith(prefix) ? pathname.slice(prefix.length) : pathname;
 
