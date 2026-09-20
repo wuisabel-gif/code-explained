@@ -18,18 +18,11 @@ function meaningfulLineCount(code) {
 
 function BrandMark() {
   return (
-    <svg
-      aria-hidden="true"
+    <img
+      alt=""
       className="brandmark"
-      fill="none"
-      viewBox="0 0 200 200"
-    >
-      <rect x="21" y="51" width="22" height="107" rx="11" fill="#2348a1" />
-      <rect x="55" y="96" width="22" height="62" rx="11" fill="#2348a1" />
-      <rect x="89" y="38" width="22" height="120" rx="11" fill="#2348a1" />
-      <rect x="123" y="68" width="22" height="90" rx="11" fill="#db332c" />
-      <rect x="157" y="108" width="22" height="50" rx="11" fill="#2348a1" />
-    </svg>
+      src={`${import.meta.env.BASE_URL}logo.svg`}
+    />
   );
 }
 

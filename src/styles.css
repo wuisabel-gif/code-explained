@@ -111,8 +111,9 @@ a:focus-visible {
 .brandmark {
   display: block;
   flex: none;
-  width: auto;
-  height: 1.2em;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 0.42em;
 }
 
 .header-chip {
