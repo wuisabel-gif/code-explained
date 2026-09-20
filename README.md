@@ -76,3 +76,5 @@ function winner(alice, bobo) {
 ## License
 
 © 2026 Isabel Wu. [MIT License](LICENSE).
+
+For local development instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
