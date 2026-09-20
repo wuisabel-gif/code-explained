@@ -23,15 +23,15 @@ int findLargest(const std::vector<int>& numbers) {
 }
 ```
 
-> This is a record hunt: Alice walks Bobo's locker of numbers, and Bobo keeps only the champion score in memory.
+> Alice looks in Bobo's box of numbers, and Bobo keeps the biggest one.
 
 | Lines | Story |
 | --- | --- |
-| 1–2 | `#include` opens iostream and vector, Alice's console toolkit and Bobo's locker. |
-| 4 | `findLargest` is the chapter title: take a locker, return one `int`. |
-| 5 | Bobo writes the first number onto a sticky note called `largest`. |
-| 7–8 | The `for` loop walks every value; the `if` asks whether a challenger beats the note. |
-| 9, 13 | A yes overwrites `largest`, then `return` hands that record back. |
+| 1–2 | These two lines get Alice her tools: one to talk to the screen, and one for Bobo's box of numbers. |
+| 4 | `findLargest` is the job name: take Bobo's box and give back the biggest number. |
+| 5 | Bobo writes down the first number and calls it largest. |
+| 7–8 | `for` means Alice looks at every number; `if` asks if this one is bigger. |
+| 9, 13 | If yes, Bobo changes the sticky note, then `return` gives that number back. |
 
 ## Example 2
 
@@ -43,7 +43,7 @@ def swap_values(alice, bobo):
     return alice, bobo
 ```
 
-> This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
+> Alice and Bobo trade numbers, and they use a cup so nobody drops theirs.
 
 ## Example 3
 
@@ -56,7 +56,7 @@ function winner(alice, bobo) {
 }
 ```
 
-> This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.
+> Alice and Bobo compare scores, and the bigger number wins.
 
 ## Example 4
 
@@ -68,7 +68,7 @@ def high_fives(n):
     return count
 ```
 
-> This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.
+> Alice high-fives again and again, and Bobo counts how many times.
 
 ## Example 5
 
@@ -78,7 +78,7 @@ function main() {
 }
 ```
 
-> This is the opening scene of a program: main starts, Alice prints a wave, and the function ends.
+> Alice waves at Bobo, and the computer shows the wave on the screen.
 
 The preview stories are local, so the interface works before an AI provider is
 configured. A live explanation asks the model to write in the same story mode.

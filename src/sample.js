@@ -21,7 +21,7 @@ int findLargest(const std::vector<int>& numbers) {
 }`,
     explanation: {
       summary:
-        "This is a record hunt: Alice walks Bobo's locker of numbers, and Bobo keeps only the champion score in memory.",
+        "Alice looks in Bobo's box of numbers, and Bobo keeps the biggest one.",
       provider: "preview",
       language: "cpp",
       explanations: [
@@ -29,31 +29,31 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-1",
           lineNumbers: [1, 2],
           sentence:
-            "The #include lines open two toolkits Alice needs later: iostream for talking to the screen, and vector for Bobo's resizable locker of numbers.",
+            "These two lines get Alice her tools: one to talk to the screen, and one for Bobo's box of numbers.",
         },
         {
           groupId: "group-2",
           lineNumbers: [4],
           sentence:
-            "findLargest is the chapter title, a function that takes Bobo's locker and promises to return one int, the biggest value inside.",
+            "findLargest is the job name: take Bobo's box and give back the biggest number.",
         },
         {
           groupId: "group-3",
           lineNumbers: [5],
           sentence:
-            "Bobo writes the first locker number into a variable called largest, a sticky note that says this is the record until someone beats it.",
+            "Bobo writes down the first number and calls it largest, like a sticky note that says this is the winner for now.",
         },
         {
           groupId: "group-4",
           lineNumbers: [7, 8],
           sentence:
-            "A for loop sends Alice through every number, and the if asks a yes-or-no question: is this challenger bigger than Bobo's sticky note?",
+            "for means Alice looks at every number, and if asks: is this one bigger than Bobo's sticky note?",
         },
         {
           groupId: "group-5",
           lineNumbers: [9, 13],
           sentence:
-            "When the challenger wins, Bobo overwrites largest, and after the loop return hands that record back as the function's answer.",
+            "If yes, Bobo changes the sticky note, and return gives that biggest number back when Alice is done looking.",
         },
       ],
     },
@@ -71,7 +71,7 @@ int findLargest(const std::vector<int>& numbers) {
     return alice, bobo`,
     explanation: {
       summary:
-        "This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.",
+        "Alice and Bobo trade numbers, and they use a cup so nobody drops theirs.",
       provider: "preview",
       language: "python",
       explanations: [
@@ -79,19 +79,19 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "def swap_values opens a Python function, a chapter that takes Alice and Bobo and will hand both values back as a pair.",
+            "def swap_values starts a little job that takes Alice and Bobo and will give both numbers back.",
         },
         {
           groupId: "group-2",
           lineNumbers: [2, 3],
           sentence:
-            "First the spare cup stores Alice's number, then Alice's slot is overwritten with Bobo's number, the classic three-step swap.",
+            "First the cup holds Alice's number so it is safe, then Alice gets Bobo's number.",
         },
         {
           groupId: "group-3",
           lineNumbers: [4, 5],
           sentence:
-            "Bobo receives the cup, then return sends both names back so the two original values have traded places.",
+            "Then Bobo gets the number from the cup, and return hands both numbers back.",
         },
       ],
     },
@@ -110,7 +110,7 @@ int findLargest(const std::vector<int>& numbers) {
 }`,
     explanation: {
       summary:
-        "This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.",
+        "Alice and Bobo compare scores, and the bigger number wins.",
       provider: "preview",
       language: "javascript",
       explanations: [
@@ -118,19 +118,19 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "function winner is a JavaScript chapter that takes two numbers, Alice's score and Bobo's score, and will return exactly one of them.",
+            "function winner starts a job that looks at Alice's number and Bobo's number and keeps only one.",
         },
         {
           groupId: "group-2",
           lineNumbers: [2, 3],
           sentence:
-            "The if is a branch: when Alice's number is greater, the story ends early and return sends Alice's value back.",
+            "if asks: is Alice's number bigger? If yes, we stop and give Alice's number back.",
         },
         {
           groupId: "group-3",
           lineNumbers: [5],
           sentence:
-            "If that branch never fired, Bobo wins the tie-or-greater case and his number is the value the function gives back.",
+            "If Alice was not bigger, Bobo wins and we give Bobo's number back.",
         },
       ],
     },
@@ -148,7 +148,7 @@ int findLargest(const std::vector<int>& numbers) {
     return count`,
     explanation: {
       summary:
-        "This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.",
+        "Alice high-fives again and again, and Bobo counts how many times.",
       provider: "preview",
       language: "python",
       explanations: [
@@ -156,25 +156,25 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "def high_fives takes n, how many times the scene should repeat, and promises a number back: the total number of claps.",
+            "def high_fives starts a job that will high-five n times and tell you the count.",
         },
         {
           groupId: "group-2",
           lineNumbers: [2],
           sentence:
-            "count starts at 0 because Bobo has not tallied anything yet, the standard empty notebook before a loop.",
+            "count starts at 0 because Bobo has not counted anything yet.",
         },
         {
           groupId: "group-3",
           lineNumbers: [3, 4],
           sentence:
-            "The for loop is the repeating beat, range(n) running Alice through n passes, and each pass adds 1 to count.",
+            "for means Alice does it again and again, and each time Bobo adds 1 to count.",
         },
         {
           groupId: "group-4",
           lineNumbers: [5],
           sentence:
-            "return count is the last line of the chapter, handing Bobo's tally back as the function's result.",
+            "return gives Bobo's count back at the end.",
         },
       ],
     },
@@ -190,7 +190,7 @@ int findLargest(const std::vector<int>& numbers) {
 }`,
     explanation: {
       summary:
-        "This is the opening scene of a program: main starts, Alice prints a wave, and the function ends.",
+        "Alice waves at Bobo, and the computer shows the wave on the screen.",
       provider: "preview",
       language: "javascript",
       explanations: [
@@ -198,13 +198,13 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "function main is the front door of this JavaScript story, the function a learner would call first.",
+            "function main is the start of this little story.",
         },
         {
           groupId: "group-2",
           lineNumbers: [2],
           sentence:
-            "console.log prints Alice's wave onto the screen, a single beat of output and then the scene is over.",
+            "console.log writes Alice's wave on the screen so you can see it.",
         },
       ],
     },

@@ -1,7 +1,7 @@
 ---
 name: code-explainer
 description: >-
-  Use when the user wants code explained as a short technical story that makes
+  Use when the user wants code explained as a simple story that makes
   learning easier — homework, a function, a loop, an if, a swap, or "what does
   this code do." Invoke as /code-explainer. Reads a source file or pasted code,
   calls the Code, Explained API when available, and returns Alice/Bobo story
@@ -10,7 +10,7 @@ description: >-
 
 # Code explainer
 
-Turn the user's code into an interesting story so the construct is easier to learn.
+Turn the user's code into a simple story so the idea is easier to learn.
 
 Alice is the action. Bobo is memory, data, or the other value. Name the real
 programming words (`for`, `if`, `return`, `def`, `function`) in the same
@@ -73,8 +73,8 @@ Use these when you must explain without the API:
 1. One short summary of the whole program.
 2. One sentence per one or two meaningful lines.
 3. Keep group order top to bottom.
-4. High-tech and educational, not cute and not stiff.
-5. A function is a chapter, a loop is a repeating beat, `return` is the last page.
+4. Short words, like a story for a young child. Keep the real programming word, then say what it does.
+5. A function is a job, a loop is doing it again, `return` is handing the answer back.
 6. Do not claim the code was run.
 7. Do not invent output.
 
