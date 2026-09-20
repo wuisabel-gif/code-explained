@@ -1,6 +1,6 @@
 # Code, Explained.
 
-Code, Explained. turns small C++ programs into patient, beginner-friendly explanations. Each explanation connects a plain-English sentence to the code lines it describes, so readers can move between the story and the source without losing their place.
+Code, Explained. turns small C++ programs into technical stories for people who just started programming. Alice is the action, Bobo is memory, and each sentence maps back to the source lines it describes.
 
 ## Features
 

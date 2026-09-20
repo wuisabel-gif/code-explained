@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { highlightLine } from "./codeHighlight.jsx";
-import { sampleCode, sampleExplanation } from "./sample.js";
+import { examples } from "./sample.js";
 
 const apiBaseUrl = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
@@ -35,6 +35,7 @@ function BrandMark() {
 
 function CodeEditor({
   code,
+  filename,
   onChange,
   selectedLines,
   errorLines,
@@ -57,7 +58,7 @@ function CodeEditor({
   return (
     <section className="workspace-column editor-column" aria-labelledby="code-label">
       <div className="section-heading-row">
-        <h2 id="code-label">Your C++ code</h2>
+        <h2 id="code-label">The source</h2>
         <span className={count > 100 ? "line-count over-limit" : "line-count"}>
           {count} / 100 lines
         </span>
@@ -68,7 +69,7 @@ function CodeEditor({
           <i />
           <i />
           <i />
-          <span>source.cpp</span>
+          <span>{filename}</span>
         </div>
         <div className="editor-body">
         <div className="gutter-window" aria-hidden="true">
@@ -128,10 +129,12 @@ function CodeEditor({
               Explaining…
             </>
           ) : (
-            "Explain my code"
+            "Read this code"
           )}
         </button>
-        <span className="privacy-note">Your code is explained, not run.</span>
+        <span className="privacy-note">
+          Syntax-checked, never executed.
+        </span>
       </div>
 
       {error ? (
@@ -152,7 +155,7 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
       aria-live="polite"
     >
       <div className="section-heading-row">
-        <h2 id="explanation-label">The simple version</h2>
+        <h2 id="explanation-label">The story</h2>
         {result?.provider && result.provider !== "preview" ? (
           <span className="provider-name">{result.provider}</span>
         ) : null}
@@ -163,7 +166,7 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
           <div className="skeleton summary-skeleton" />
           <div className="skeleton row-skeleton" />
           <div className="skeleton row-skeleton short" />
-          <p>Reading the code one small piece at a time…</p>
+          <p>Reading the next beat of the program…</p>
         </div>
       ) : result ? (
         <>
@@ -196,8 +199,8 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
       ) : (
         <div className="empty-state">
           <span className="empty-cursor" aria-hidden="true" />
-          <h3>Your explanation will appear here.</h3>
-          <p>Paste your C++ code, then press “Explain my code.”</p>
+          <h3>The story starts here.</h3>
+          <p>Paste C++ or pick a scene, then press “Read this code.”</p>
         </div>
       )}
     </section>
@@ -205,23 +208,47 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
 }
 
 export default function App() {
-  const [code, setCode] = useState(sampleCode);
-  const [result, setResult] = useState(sampleExplanation);
-  const [selectedId, setSelectedId] = useState("group-4");
-  const [selectedLines, setSelectedLines] = useState([7, 8]);
+  const [activeExample, setActiveExample] = useState(examples[0].id);
+  const [code, setCode] = useState(examples[0].code);
+  const [result, setResult] = useState(examples[0].explanation);
+  const [selectedId, setSelectedId] = useState(examples[0].focusId);
+  const [selectedLines, setSelectedLines] = useState(
+    examples[0].explanation.explanations.find(
+      (item) => item.groupId === examples[0].focusId,
+    )?.lineNumbers ?? [],
+  );
   const [errorLines, setErrorLines] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const count = useMemo(() => meaningfulLineCount(code), [code]);
+  const activeScene = examples.find((item) => item.id === activeExample);
+  const filename = activeScene?.filename ?? "source.cpp";
 
   function handleCodeChange(nextCode) {
+    setActiveExample(null);
     setCode(nextCode);
     setResult(null);
     setSelectedId(null);
     setSelectedLines([]);
     setErrorLines([]);
     setError(null);
+  }
+
+  function loadExample(example) {
+    const focus =
+      example.explanation.explanations.find(
+        (item) => item.groupId === example.focusId,
+      ) ?? example.explanation.explanations[0];
+    setActiveExample(example.id);
+    setCode(example.code);
+    setResult(example.explanation);
+    setErrorLines([]);
+    setError(null);
+    if (focus) {
+      setSelectedId(focus.groupId);
+      setSelectedLines(focus.lineNumbers);
+    }
   }
 
   function selectExplanation(explanation) {
@@ -298,28 +325,50 @@ export default function App() {
 
       <main>
         <div className="intro">
-          <p className="eyebrow">explain · cpp · line by line</p>
-          <h1>Paste C++. Get the story.</h1>
+          <p className="eyebrow">lab notes · first-year c++ · story mode</p>
+          <h1>Read C++ like a novel.</h1>
           <p className="lede">
-            Every one or two lines, explained in one clear sentence. Click a
-            sentence to light up the code it belongs to.
+            Built for people who just started programming. Alice is the action.
+            Bobo is memory. Each function is a scene, each loop a repeating
+            beat, each return the last page.
           </p>
           <ul className="intro-points">
             <li>
-              <b>Summary first.</b> One short reading of the whole program.
+              <b>Name the construct.</b> Loop, if, return, vector — then what
+              it does in the story.
             </li>
             <li>
-              <b>Mapped lines.</b> Each sentence points at the source.
+              <b>Follow the characters.</b> Click a sentence and the matching
+              lines light up.
             </li>
             <li>
-              <b>Checked, not run.</b> Clang looks at syntax. Nothing executes.
+              <b>Lab-safe.</b> Clang checks syntax. The machine never runs the
+              plot.
             </li>
           </ul>
         </div>
 
+        <div className="example-row" aria-label="Example scenes">
+          <span className="example-label">Scenes</span>
+          {examples.map((example) => (
+            <button
+              className={
+                activeExample === example.id
+                  ? "example-chip selected"
+                  : "example-chip"
+              }
+              key={example.id}
+              onClick={() => loadExample(example)}
+              type="button"
+            >
+              {example.title}
+            </button>
+          ))}
+        </div>
+
         <div className="readout">
           <div className="readout-head">
-            <span className="file">source.cpp</span>
+            <span className="file">{filename}</span>
             <span className={count > 100 ? "count-chip over-limit" : "count-chip"}>
               {count} / 100 lines
             </span>
@@ -341,6 +390,7 @@ export default function App() {
               code={code}
               error={error}
               errorLines={errorLines}
+              filename={filename}
               isLoading={isLoading}
               onChange={handleCodeChange}
               onExplain={explainCode}

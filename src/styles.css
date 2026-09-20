@@ -206,6 +206,52 @@ main {
   font-weight: 700;
 }
 
+.example-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.15rem;
+}
+
+.example-label {
+  margin-right: 0.2rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.example-chip {
+  padding: 0.42rem 0.75rem;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition:
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.example-chip:hover {
+  border-color: var(--brand);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.example-chip.selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .readout {
   display: grid;
   grid-template-rows: auto minmax(520px, 1fr);

@@ -1,7 +1,9 @@
 # Demo
 
-This is the example shown when the app first opens. Paste the following C++
-code into the editor and choose **Explain my code**:
+The app opens on a short C++ scene and a story-mode explanation. Alice is the
+action. Bobo is memory. Pick any scene from the row above the editor.
+
+## The record hunt
 
 ```cpp
 #include <iostream>
@@ -20,29 +22,75 @@ int findLargest(const std::vector<int>& numbers) {
 }
 ```
 
-## Example result
+> This is a record hunt: Alice walks Bobo's locker of numbers, and Bobo keeps only the champion score in memory.
 
-> This program looks through a group of numbers and finds the biggest one.
-
-The explanation rail connects each sentence to the relevant lines:
-
-| Lines | Explanation |
+| Lines | Story |
 | --- | --- |
-| 1–2 | These lines bring in ready-made tools for showing messages and holding a group of numbers. |
-| 4 | This line starts a set of instructions called `findLargest` that will give back a whole number. |
-| 5 | This line keeps the first number as the biggest one found so far. |
-| 7–8 | These lines check each number one by one and ask whether it is bigger than the saved number. |
-| 9 | This line remembers the new number when it is bigger. |
-| 13 | This line gives back the biggest number after every number has been checked. |
+| 1–2 | `#include` opens iostream and vector, Alice's console toolkit and Bobo's locker. |
+| 4 | `findLargest` is the chapter title: take a locker, return one `int`. |
+| 5 | Bobo writes the first number onto a sticky note called `largest`. |
+| 7–8 | The `for` loop walks every value; the `if` asks whether a challenger beats the note. |
+| 9, 13 | A yes overwrites `largest`, then `return` hands that record back. |
 
-The initial result is a local preview, so the interface is useful even before
-an AI provider is configured. A live explanation validates the C++ with
-`clang++`, then asks the configured provider for the same summary-and-mapping
-format.
+## The trade
+
+```cpp
+void swapValues(int& alice, int& bobo) {
+    int cup = alice;
+    alice = bobo;
+    bobo = cup;
+}
+```
+
+> This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
+
+The `&` marks are references, so the function edits the original variables, not copies.
+
+## The fork
+
+```cpp
+int winner(int alice, int bobo) {
+    if (alice > bobo) {
+        return alice;
+    }
+    return bobo;
+}
+```
+
+> This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.
+
+## The counter
+
+```cpp
+int highFives(int n) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        count = count + 1;
+    }
+    return count;
+}
+```
+
+> This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.
+
+## Opening scene
+
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Alice waves at Bobo.\n";
+    return 0;
+}
+```
+
+> This is the opening scene of a C++ program: main starts, Alice prints a wave, and the process exits cleanly.
+
+The preview stories are local, so the interface works before an AI provider is
+configured. A live explanation still validates with `clang++`, then asks the
+model to write in the same story mode.
 
 ## Try the API directly
-
-With the local server running, send a request like this:
 
 ```bash
 curl -X POST http://127.0.0.1:4173/api/explain \
@@ -54,6 +102,3 @@ curl -X POST http://127.0.0.1:4173/api/explain \
 }
 JSON
 ```
-
-The response contains a summary, the provider name, and line-number mappings
-owned by the server.
