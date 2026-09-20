@@ -30,6 +30,7 @@ function CodeEditor({
   code,
   filename,
   onChange,
+  onUpload,
   selectedLines,
   errorLines,
   onExplain,
@@ -125,8 +126,26 @@ function CodeEditor({
             "Read this code"
           )}
         </button>
+        <label className="upload-button">
+          <input
+            accept=".cpp,.cc,.cxx,.c,.h,.hpp,.hh,.txt"
+            hidden
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              event.target.value = "";
+              if (!file) return;
+              const reader = new FileReader();
+              reader.onload = () => {
+                onUpload(String(reader.result || ""), file.name);
+              };
+              reader.readAsText(file);
+            }}
+            type="file"
+          />
+          Upload a .cpp
+        </label>
         <span className="privacy-note">
-          Syntax-checked, never executed.
+          Syntax-checked, never executed. Live reads go through OpenAI.
         </span>
       </div>
 
@@ -202,6 +221,7 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
 
 export default function App() {
   const [activeExample, setActiveExample] = useState(examples[0].id);
+  const [uploadedName, setUploadedName] = useState(null);
   const [code, setCode] = useState(examples[0].code);
   const [result, setResult] = useState(examples[0].explanation);
   const [selectedId, setSelectedId] = useState(examples[0].focusId);
@@ -216,10 +236,21 @@ export default function App() {
 
   const count = useMemo(() => meaningfulLineCount(code), [code]);
   const activeScene = examples.find((item) => item.id === activeExample);
-  const filename = activeScene?.filename ?? "source.cpp";
+  const filename = uploadedName ?? activeScene?.filename ?? "source.cpp";
 
   function handleCodeChange(nextCode) {
     setActiveExample(null);
+    setCode(nextCode);
+    setResult(null);
+    setSelectedId(null);
+    setSelectedLines([]);
+    setErrorLines([]);
+    setError(null);
+  }
+
+  function handleUpload(nextCode, name) {
+    setActiveExample(null);
+    setUploadedName(name);
     setCode(nextCode);
     setResult(null);
     setSelectedId(null);
@@ -234,6 +265,7 @@ export default function App() {
         (item) => item.groupId === example.focusId,
       ) ?? example.explanation.explanations[0];
     setActiveExample(example.id);
+    setUploadedName(null);
     setCode(example.code);
     setResult(example.explanation);
     setErrorLines([]);
@@ -321,22 +353,23 @@ export default function App() {
           <p className="eyebrow">when I learn programming</p>
           <h1>I open this for a coherent story.</h1>
           <p className="lede">
-            I paste a little C++ and read it back as a scene. Alice is the
-            action. Bobo is memory. Each sentence stays tied to the lines it
-            explains.
+            I paste or upload a little C++ and read it back as a scene. Alice
+            is the action. Bobo is memory. OpenAI is embedded in the site so a
+            live read can turn homework into that story.
           </p>
           <ul className="intro-points">
             <li>
-              <b>Name the construct.</b> Loop, if, return, vector — then what
-              it does in the story.
+              <b>Why bother.</b> Syntax without a plot is a wall. I wanted the
+              next page: what is this function actually doing.
             </li>
             <li>
-              <b>Follow the characters.</b> Click a sentence and the matching
-              lines light up.
+              <b>Why upload C++.</b> The file is already on disk. Drop a
+              <code> .cpp </code>
+              instead of retyping it.
             </li>
             <li>
-              <b>Lab-safe.</b> Clang checks syntax. The machine never runs the
-              plot.
+              <b>OpenAI, inside the page.</b> A live read sends the code to the
+              embedded OpenAI API and maps each sentence back to the source.
             </li>
           </ul>
         </div>
@@ -386,6 +419,7 @@ export default function App() {
               filename={filename}
               isLoading={isLoading}
               onChange={handleCodeChange}
+              onUpload={handleUpload}
               onExplain={explainCode}
               selectedLines={selectedLines}
             />

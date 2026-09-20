@@ -207,6 +207,11 @@ main {
   font-weight: 700;
 }
 
+.intro-points code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+
 .example-row {
   display: flex;
   flex-wrap: wrap;
@@ -578,6 +583,30 @@ main {
   font-size: 0.74rem;
 }
 
+.upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.05rem;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 0.96rem;
+  font-weight: 600;
+  transition:
+    border-color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.upload-button:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
 .inline-error {
   display: grid;
   gap: 3px;
@@ -899,7 +928,8 @@ main {
     gap: 10px;
   }
 
-  .primary-button {
+  .primary-button,
+  .upload-button {
     width: 100%;
   }
 
