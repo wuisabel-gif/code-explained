@@ -157,4 +157,4 @@ The frontend can be deployed as a static Vite site. The explanation API requires
 
 ## License
 
-This project is available under the [MIT License](LICENSE).
+This project is available under the [MIT License](LICENSE). Copyright © 2026 Isabel Wu.

@@ -108,6 +108,23 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.header-github {
+  margin-left: auto;
+  color: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.header-github:hover {
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
 main {
   padding: clamp(2rem, 5vw, 3.4rem) var(--pad) 2.4rem;
 }
@@ -536,6 +553,32 @@ main {
 
 .row-skeleton.short {
   width: 82%;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.15rem;
+  padding: 1.4rem var(--pad) 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+
+.site-footer a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--brand);
+}
+
+.footer-sep {
+  margin: 0 0.45rem;
+  color: var(--line-2);
 }
 
 @keyframes spin {

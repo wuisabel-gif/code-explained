@@ -256,6 +256,14 @@ export default function App() {
           Code, Explained.
         </a>
         <span className="header-chip">C++</span>
+        <a
+          className="header-github"
+          href="https://github.com/wuisabel-gif/code-explained"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GitHub
+        </a>
       </header>
 
       <main>
@@ -282,6 +290,39 @@ export default function App() {
           />
         </div>
       </main>
+
+      <footer className="site-footer">
+        <a
+          href="https://github.com/wuisabel-gif/code-explained"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Source on GitHub
+        </a>
+        <span className="footer-sep" aria-hidden="true">
+          ·
+        </span>
+        <span>
+          © 2026{" "}
+          <a
+            href="https://github.com/wuisabel-gif"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Isabel Wu
+          </a>
+        </span>
+        <span className="footer-sep" aria-hidden="true">
+          ·
+        </span>
+        <a
+          href="https://github.com/wuisabel-gif/code-explained/blob/main/LICENSE"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MIT License
+        </a>
+      </footer>
     </div>
   );
 }
