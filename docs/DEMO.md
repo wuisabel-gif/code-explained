@@ -3,7 +3,7 @@
 The app opens on a short C++ scene and a story-mode explanation. Alice is the
 action. Bobo is memory. Pick any scene from the row above the editor.
 
-## The record hunt
+## Example 1
 
 ```cpp
 #include <iostream>
@@ -32,7 +32,7 @@ int findLargest(const std::vector<int>& numbers) {
 | 7–8 | The `for` loop walks every value; the `if` asks whether a challenger beats the note. |
 | 9, 13 | A yes overwrites `largest`, then `return` hands that record back. |
 
-## The trade
+## Example 2
 
 ```cpp
 void swapValues(int& alice, int& bobo) {
@@ -46,7 +46,7 @@ void swapValues(int& alice, int& bobo) {
 
 The `&` marks are references, so the function edits the original variables, not copies.
 
-## The fork
+## Example 3
 
 ```cpp
 int winner(int alice, int bobo) {
@@ -59,7 +59,7 @@ int winner(int alice, int bobo) {
 
 > This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.
 
-## The counter
+## Example 4
 
 ```cpp
 int highFives(int n) {
@@ -73,7 +73,7 @@ int highFives(int n) {
 
 > This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.
 
-## Opening scene
+## Example 5
 
 ```cpp
 #include <iostream>

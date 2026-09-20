@@ -375,7 +375,7 @@ export default function App() {
         </div>
 
         <div className="example-row" aria-label="Example scenes">
-          <span className="example-label">Scenes</span>
+          <span className="example-label">Examples</span>
           {examples.map((example) => (
             <button
               className={

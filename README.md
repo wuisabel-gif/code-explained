@@ -12,11 +12,11 @@ Paste or upload a homework file. Alice is the action. Bobo is memory. Each sente
 
 **OpenAI, inside the page.** The site embeds the OpenAI API. A live read sends your code through that API and maps each sentence back to the source. The code is checked, never compiled, never run.
 
-![The record hunt: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
+![Example 1: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
 
 ## The words it produces
 
-**The record hunt**
+**Example 1**
 
 ```cpp
 int findLargest(const std::vector<int>& numbers) {
@@ -34,7 +34,7 @@ int findLargest(const std::vector<int>& numbers) {
 
 A `for` loop sends Alice through every number, and the `if` asks whether this challenger is bigger than Bobo's sticky note.
 
-**The trade**
+**Example 2**
 
 ```cpp
 void swapValues(int& alice, int& bobo) {
@@ -46,7 +46,7 @@ void swapValues(int& alice, int& bobo) {
 
 > This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
 
-**Opening scene**
+**Example 3**
 
 ```cpp
 int main() {

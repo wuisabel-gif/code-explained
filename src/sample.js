@@ -1,8 +1,8 @@
 export const examples = [
   {
     id: "largest",
-    title: "The record hunt",
-    filename: "findLargest.cpp",
+    title: "Example 1",
+    filename: "example-1.cpp",
     focusId: "group-4",
     code: `#include <iostream>
 #include <vector>
@@ -58,8 +58,8 @@ int findLargest(const std::vector<int>& numbers) {
   },
   {
     id: "swap",
-    title: "The trade",
-    filename: "swapValues.cpp",
+    title: "Example 2",
+    filename: "example-2.cpp",
     focusId: "group-2",
     code: `void swapValues(int& alice, int& bobo) {
     int cup = alice;
@@ -94,8 +94,8 @@ int findLargest(const std::vector<int>& numbers) {
   },
   {
     id: "winner",
-    title: "The fork",
-    filename: "winner.cpp",
+    title: "Example 3",
+    filename: "example-3.cpp",
     focusId: "group-2",
     code: `int winner(int alice, int bobo) {
     if (alice > bobo) {
@@ -131,8 +131,8 @@ int findLargest(const std::vector<int>& numbers) {
   },
   {
     id: "highfives",
-    title: "The counter",
-    filename: "highFives.cpp",
+    title: "Example 4",
+    filename: "example-4.cpp",
     focusId: "group-3",
     code: `int highFives(int n) {
     int count = 0;
@@ -175,8 +175,8 @@ int findLargest(const std::vector<int>& numbers) {
   },
   {
     id: "wave",
-    title: "Opening scene",
-    filename: "wave.cpp",
+    title: "Example 5",
+    filename: "example-5.cpp",
     focusId: "group-3",
     code: `#include <iostream>
 
