@@ -212,7 +212,10 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
         <div className="empty-state">
           <span className="empty-cursor" aria-hidden="true" />
           <h3>Your story starts here.</h3>
-          <p>Paste or upload C++, or pick a scene, then press “Read this code.”</p>
+          <p>
+            Paste the code, drop the file, or pick a scene, then press “Read
+            this code.”
+          </p>
         </div>
       )}
     </section>
@@ -353,17 +356,18 @@ export default function App() {
           <p className="eyebrow">make learning easier</p>
           <h1>Turn your C++ into a story.</h1>
           <p className="lede">
-            Paste or upload homework and get it back as a short scene. Alice is
-            the action. Bobo is memory. OpenAI is built into the site so each
-            sentence maps to the lines it explains.
+            Paste or upload your homework and get it back as a short scene:
+            Alice is the action, Bobo is memory, and OpenAI is built into the
+            site so each sentence maps to the lines it explains.
           </p>
           <ul className="intro-points">
             <li>
-              <b>Why bother.</b> Syntax without a plot is hard to remember. A
-              story you can follow makes the function easier to learn.
+              <b>Why bother.</b> Syntax without a plot is hard to remember, and
+              a story you can follow makes the function easier to learn.
             </li>
             <li>
-              <b>Why upload C++.</b> The file is already on disk. Drop a
+              <b>Why upload C++.</b> The file is already on disk, sitting where
+              you saved it. Drop a
               <code> .cpp </code>
               instead of retyping it.
             </li>

@@ -2,15 +2,15 @@
 
 [Open the site](https://wuisabel-gif.github.io/code-explained/)
 
-Turn your C++ into an interesting story, so learning it is easier.
+Your homework is already on disk: a C++ file, lines you typed, syntax that is hard to remember without a plot. Turn your C++ into an interesting story, so learning it is easier.
 
-Paste or upload a homework file. Alice is the action. Bobo is memory. Each sentence stays tied to the lines it explains.
+Paste or upload a homework file: Alice is the action, Bobo is memory, and each sentence stays tied to the lines it explains.
 
-**Why bother.** Syntax without a plot is hard to remember. A scene you can follow makes the function easier to learn.
+**Why bother.** Syntax without a plot is hard to remember, and a scene you can follow makes the function easier to learn.
 
-**Why upload C++.** The file is already on disk. Drop a `.cpp` instead of retyping it.
+**Why upload C++.** The file is already on disk, sitting where you saved it. Drop a `.cpp` instead of retyping it.
 
-**OpenAI, inside the page.** The site embeds the OpenAI API. A live read sends your code through that API and maps each sentence back to the source. The code is checked, never compiled, never run.
+**OpenAI, inside the page.** The site embeds the OpenAI API, so a live read sends your code through that API and maps each sentence back to the source. The code is checked, never compiled, never run.
 
 ![Example 1: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
 

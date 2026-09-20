@@ -1,7 +1,7 @@
 {
   "name": "code-explained",
   "version": "0.1.0",
-  "description": "Turn small C++ programs into patient, line-by-line English explanations.",
+  "description": "Turn your C++ into a story: each sentence mapped to the lines it explains.",
   "private": true,
   "type": "module",
   "scripts": {
