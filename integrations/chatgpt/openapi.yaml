@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Code, Explained
+  version: 0.1.0
+  description: >
+    Turn small C++ programs into short technical stories for people who just
+    started programming. Alice is the action. Bobo is memory.
+servers:
+  - url: https://code-explained-api.onrender.com
+    description: Render API. Replace this host with the live service URL.
+paths:
+  /api/health:
+    get:
+      operationId: getHealth
+      summary: Check that the explanation API is up
+      responses:
+        "200":
+          description: The API is reachable
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  provider:
+                    type: string
+  /api/explain:
+    post:
+      operationId: explainCpp
+      summary: Explain C++ as a mapped story
+      description: >
+        Send C++ source. The server syntax-checks it, then returns a summary
+        and one story sentence for every one or two meaningful lines.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - language
+                - code
+              properties:
+                language:
+                  type: string
+                  enum: [cpp]
+                code:
+                  type: string
+                  description: The C++ source to explain
+      responses:
+        "200":
+          description: A story with line mappings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Explanation"
+        "400":
+          description: Missing code or unsupported language
+        "422":
+          description: C++ syntax error
+        "502":
+          description: Explanation provider failed
+components:
+  schemas:
+    Explanation:
+      type: object
+      required:
+        - summary
+        - provider
+        - explanations
+      properties:
+        summary:
+          type: string
+        provider:
+          type: string
+        explanations:
+          type: array
+          items:
+            type: object
+            required:
+              - groupId
+              - lineNumbers
+              - sentence
+            properties:
+              groupId:
+                type: string
+              lineNumbers:
+                type: array
+                items:
+                  type: integer
+              sentence:
+                type: string

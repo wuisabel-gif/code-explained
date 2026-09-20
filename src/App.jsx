@@ -211,8 +211,8 @@ function ExplanationRail({ result, selectedId, onSelect, isLoading }) {
       ) : (
         <div className="empty-state">
           <span className="empty-cursor" aria-hidden="true" />
-          <h3>The story starts here.</h3>
-          <p>Paste C++ or pick a scene, then press “Read this code.”</p>
+          <h3>Your story starts here.</h3>
+          <p>Paste or upload C++, or pick a scene, then press “Read this code.”</p>
         </div>
       )}
     </section>
@@ -350,17 +350,17 @@ export default function App() {
 
       <main>
         <div className="intro">
-          <p className="eyebrow">when I learn programming</p>
-          <h1>I open this for a coherent story.</h1>
+          <p className="eyebrow">make learning easier</p>
+          <h1>Turn your C++ into a story.</h1>
           <p className="lede">
-            I paste or upload a little C++ and read it back as a scene. Alice
-            is the action. Bobo is memory. OpenAI is embedded in the site so a
-            live read can turn homework into that story.
+            Paste or upload homework and get it back as a short scene. Alice is
+            the action. Bobo is memory. OpenAI is built into the site so each
+            sentence maps to the lines it explains.
           </p>
           <ul className="intro-points">
             <li>
-              <b>Why bother.</b> Syntax without a plot is a wall. I wanted the
-              next page: what is this function actually doing.
+              <b>Why bother.</b> Syntax without a plot is hard to remember. A
+              story you can follow makes the function easier to learn.
             </li>
             <li>
               <b>Why upload C++.</b> The file is already on disk. Drop a
@@ -368,7 +368,7 @@ export default function App() {
               instead of retyping it.
             </li>
             <li>
-              <b>OpenAI, inside the page.</b> A live read sends the code to the
+              <b>OpenAI, inside the page.</b> A live read sends your code to the
               embedded OpenAI API and maps each sentence back to the source.
             </li>
           </ul>
