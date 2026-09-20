@@ -1,5 +1,11 @@
 import { useMemo, useRef, useState } from "react";
 import { highlightLine } from "./codeHighlight.jsx";
+import {
+  defaultFilename,
+  detectLanguage,
+  languageLabel,
+  uploadAccept,
+} from "./language.js";
 import { examples } from "./sample.js";
 
 const apiBaseUrl = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
@@ -97,7 +103,7 @@ function CodeEditor({
             })}
           </pre>
           <textarea
-            aria-label="C++ code"
+            aria-label="Source code"
             autoCapitalize="off"
             autoCorrect="off"
             onChange={(event) => onChange(event.target.value)}
@@ -128,7 +134,7 @@ function CodeEditor({
         </button>
         <label className="upload-button">
           <input
-            accept=".cpp,.cc,.cxx,.c,.h,.hpp,.hh,.txt"
+            accept={uploadAccept}
             hidden
             onChange={(event) => {
               const file = event.target.files?.[0];
@@ -142,10 +148,11 @@ function CodeEditor({
             }}
             type="file"
           />
-          Upload a .cpp
+          Upload a file
         </label>
         <span className="privacy-note">
-          Syntax-checked, never executed. Live reads go through OpenAI.
+          Never executed. C and C++ are syntax-checked. Live reads go through
+          OpenAI.
         </span>
       </div>
 
@@ -239,7 +246,13 @@ export default function App() {
 
   const count = useMemo(() => meaningfulLineCount(code), [code]);
   const activeScene = examples.find((item) => item.id === activeExample);
-  const filename = uploadedName ?? activeScene?.filename ?? "source.cpp";
+  const language = detectLanguage(
+    code,
+    uploadedName ?? activeScene?.filename,
+    activeScene?.language,
+  );
+  const filename =
+    uploadedName ?? activeScene?.filename ?? defaultFilename(language);
 
   function handleCodeChange(nextCode) {
     setActiveExample(null);
@@ -296,7 +309,7 @@ export default function App() {
       const response = await fetch(`${apiBaseUrl}/api/explain`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, language: "cpp" }),
+        body: JSON.stringify({ code, language, filename }),
       });
       const data = await response.json();
 
@@ -340,7 +353,7 @@ export default function App() {
           <BrandMark />
           Code, Explained.
         </a>
-        <span className="header-chip">C++</span>
+        <span className="header-chip">{languageLabel(language)}</span>
         <a
           className="header-github"
           href="https://github.com/wuisabel-gif/code-explained"
@@ -354,11 +367,11 @@ export default function App() {
       <main>
         <div className="intro">
           <p className="eyebrow">make learning easier</p>
-          <h1>Turn your C++ into a story.</h1>
+          <h1>Turn your code into a story.</h1>
           <p className="lede">
-            Paste or upload your homework and get it back as a short scene:
-            Alice is the action, Bobo is memory, and OpenAI is built into the
-            site so each sentence maps to the lines it explains.
+            Paste or upload your code and get it back as a short scene: Alice
+            is the action, Bobo is memory, and OpenAI is built into the site so
+            each sentence maps to the lines it explains.
           </p>
           <ul className="intro-points">
             <li>
@@ -366,9 +379,7 @@ export default function App() {
               a story you can follow makes the function easier to learn.
             </li>
             <li>
-              <b>Why upload C++.</b> The file is already on disk, sitting where
-              you saved it. Drop a
-              <code> .cpp </code>
+              <b>Why upload.</b> It can be any code you have. Drop the file
               instead of retyping it.
             </li>
             <li>

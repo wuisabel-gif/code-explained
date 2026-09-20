@@ -70,8 +70,8 @@ The project reads `.env` when it starts:
 npm run dev
 ```
 
-Open [http://127.0.0.1:5173](http://127.0.0.1:5173), paste C++ code, and press
-**Explain my code**.
+Open [http://127.0.0.1:5173](http://127.0.0.1:5173), paste code, and press
+**Read this code**.
 
 ## Common problems
 
@@ -96,7 +96,7 @@ ollama list
 The model may be too large for the computer. Choose a smaller coding model,
 update `OLLAMA_MODEL`, and restart the website.
 
-### C++ checker is unavailable
+### C or C++ checker is unavailable
 
 Install Clang and confirm this command works:
 

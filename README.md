@@ -2,17 +2,17 @@
 
 [Open the site](https://wuisabel-gif.github.io/code-explained/)
 
-Your homework is already on disk: a C++ file, lines you typed, syntax that is hard to remember without a plot. Turn your C++ into an interesting story, so learning it is easier.
+Your code is already in your hands: lines you typed, syntax that is hard to remember without a plot. Turn your code into an interesting story, so learning it is easier.
 
-Paste or upload a homework file: Alice is the action, Bobo is memory, and each sentence stays tied to the lines it explains.
+Paste or upload any code you have: Alice is the action, Bobo is memory, and each sentence stays tied to the lines it explains.
 
 **Why bother.** Syntax without a plot is hard to remember, and a scene you can follow makes the function easier to learn.
 
-**Why upload C++.** The file is already on disk, sitting where you saved it. Drop a `.cpp` instead of retyping it.
+**Why upload.** It can be any code you have. Drop the file instead of retyping it.
 
-**OpenAI, inside the page.** The site embeds the OpenAI API, so a live read sends your code through that API and maps each sentence back to the source. The code is checked, never compiled, never run.
+**OpenAI, inside the page.** The site embeds the OpenAI API, so a live read sends your code through that API and maps each sentence back to the source. The code is never compiled and never run. C and C++ are syntax-checked first.
 
-![Example 1: C++ on the left, the story on the right](docs/screenshots/record-hunt.png)
+![Example 1: code on the left, the story on the right](docs/screenshots/record-hunt.png)
 
 ## The words it produces
 
@@ -36,26 +36,28 @@ A `for` loop sends Alice through every number, and the `if` asks whether this ch
 
 **Example 2**
 
-```cpp
-void swapValues(int& alice, int& bobo) {
-    int cup = alice;
-    alice = bobo;
-    bobo = cup;
-}
+```python
+def swap_values(alice, bobo):
+    cup = alice
+    alice = bobo
+    bobo = cup
+    return alice, bobo
 ```
 
 > This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
 
 **Example 3**
 
-```cpp
-int main() {
-    std::cout << "Alice waves at Bobo.\n";
-    return 0;
+```javascript
+function winner(alice, bobo) {
+    if (alice > bobo) {
+        return alice;
+    }
+    return bobo;
 }
 ```
 
-> This is the opening scene of a C++ program: main starts, Alice prints a wave, and the process exits cleanly.
+> This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.
 
 ## License
 

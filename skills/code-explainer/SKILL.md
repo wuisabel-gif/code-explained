@@ -1,19 +1,19 @@
 ---
 name: code-explainer
 description: >-
-  Use when the user wants C++ explained as a short technical story that makes
+  Use when the user wants code explained as a short technical story that makes
   learning easier — homework, a function, a loop, an if, a swap, or "what does
-  this code do." Invoke as /code-explainer. Reads a .cpp file or pasted code,
+  this code do." Invoke as /code-explainer. Reads a source file or pasted code,
   calls the Code, Explained API when available, and returns Alice/Bobo story
   beats mapped to line numbers. Not for compiling, running, or debugging code.
 ---
 
 # Code explainer
 
-Turn the user's C++ into an interesting story so the construct is easier to learn.
+Turn the user's code into an interesting story so the construct is easier to learn.
 
 Alice is the action. Bobo is memory, data, or the other value. Name the real
-programming words (`for`, `if`, `return`, `vector`, reference) in the same
+programming words (`for`, `if`, `return`, `def`, `function`) in the same
 sentence as the picture.
 
 Do not lecture. Do not write first-person diary copy. Invite the reader into
@@ -22,7 +22,7 @@ the scene.
 ## Command
 
 ```text
-/code-explainer path/to/file.cpp
+/code-explainer path/to/file.py
 /code-explainer
 ```
 
@@ -36,8 +36,11 @@ When `CODE_EXPLAINED_API_URL` is set (no trailing slash), POST the code:
 ```bash
 curl -sS -X POST "$CODE_EXPLAINED_API_URL/api/explain" \
   -H 'Content-Type: application/json' \
-  -d '{"language":"cpp","code":"<source>"}'
+  -d '{"language":"python","filename":"main.py","code":"<source>"}'
 ```
+
+`language` can be any language name, or omitted so the server sniffs the code.
+C and C++ are syntax-checked with clang. Other languages are read as written.
 
 The default production shape is:
 
@@ -52,6 +55,7 @@ On success, show:
 - the `summary`
 - each `sentence` with its `lineNumbers`
 - the `provider` label
+- the `language` label
 
 If the API returns `kind: "syntax_error"`, show the simple diagnostic. Do not
 invent a story for broken syntax.

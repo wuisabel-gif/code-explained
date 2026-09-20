@@ -43,11 +43,14 @@ function parseDiagnostics(stderr, filename) {
   return diagnostics;
 }
 
-function runClang(filename) {
+function runClang(filename, language) {
+  const isC = language === "c";
   return new Promise((resolve, reject) => {
     const child = spawn(
-      process.env.CLANG_PATH || "clang++",
-      ["-std=c++20", "-fsyntax-only", "-x", "c++", filename],
+      process.env.CLANG_PATH || (isC ? "clang" : "clang++"),
+      isC
+        ? ["-std=c17", "-fsyntax-only", "-x", "c", filename]
+        : ["-std=c++20", "-fsyntax-only", "-x", "c++", filename],
       { stdio: ["ignore", "ignore", "pipe"] },
     );
     let stderr = "";
@@ -57,7 +60,7 @@ function runClang(filename) {
       child.kill("SIGKILL");
       if (!settled) {
         settled = true;
-        reject(new Error("C++ validation took too long."));
+        reject(new Error("Syntax checking took too long."));
       }
     }, 8_000);
 
@@ -83,13 +86,16 @@ function runClang(filename) {
   });
 }
 
-export async function validateCppSyntax(code) {
+export async function validateClangSyntax(code, language = "cpp") {
   const directory = await mkdtemp(path.join(tmpdir(), "code-explained-"));
-  const filename = path.join(directory, "input.cpp");
+  const filename = path.join(
+    directory,
+    language === "c" ? "input.c" : "input.cpp",
+  );
 
   try {
     await writeFile(filename, code, "utf8");
-    const result = await runClang(filename);
+    const result = await runClang(filename, language);
     return {
       valid: result.code === 0,
       diagnostics: parseDiagnostics(result.stderr, filename),
@@ -98,4 +104,8 @@ export async function validateCppSyntax(code) {
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
+}
+
+export async function validateCppSyntax(code) {
+  return validateClangSyntax(code, "cpp");
 }

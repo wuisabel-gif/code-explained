@@ -1,7 +1,8 @@
 # Demo
 
-The app opens on a short C++ scene and a story-mode explanation. Alice is the
-action. Bobo is memory. Pick any scene from the row above the editor.
+The app opens on a short scene and a story-mode explanation. Alice is the
+action. Bobo is memory. Pick any example from the row above the editor. C++,
+Python, and JavaScript are included. Paste any other language you have.
 
 ## Example 1
 
@@ -34,22 +35,20 @@ int findLargest(const std::vector<int>& numbers) {
 
 ## Example 2
 
-```cpp
-void swapValues(int& alice, int& bobo) {
-    int cup = alice;
-    alice = bobo;
-    bobo = cup;
-}
+```python
+def swap_values(alice, bobo):
+    cup = alice
+    alice = bobo
+    bobo = cup
+    return alice, bobo
 ```
 
 > This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.
 
-The `&` marks are references, so the function edits the original variables, not copies.
-
 ## Example 3
 
-```cpp
-int winner(int alice, int bobo) {
+```javascript
+function winner(alice, bobo) {
     if (alice > bobo) {
         return alice;
     }
@@ -61,34 +60,30 @@ int winner(int alice, int bobo) {
 
 ## Example 4
 
-```cpp
-int highFives(int n) {
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        count = count + 1;
-    }
-    return count;
-}
+```python
+def high_fives(n):
+    count = 0
+    for i in range(n):
+        count = count + 1
+    return count
 ```
 
 > This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.
 
 ## Example 5
 
-```cpp
-#include <iostream>
-
-int main() {
-    std::cout << "Alice waves at Bobo.\n";
-    return 0;
+```javascript
+function main() {
+    console.log("Alice waves at Bobo.");
 }
 ```
 
-> This is the opening scene of a C++ program: main starts, Alice prints a wave, and the process exits cleanly.
+> This is the opening scene of a program: main starts, Alice prints a wave, and the function ends.
 
 The preview stories are local, so the interface works before an AI provider is
-configured. A live explanation still validates with `clang++`, then asks the
-model to write in the same story mode.
+configured. A live explanation asks the model to write in the same story mode.
+C and C++ are still syntax-checked with clang. Other languages are read as
+written.
 
 ## Try the API directly
 
@@ -97,8 +92,8 @@ curl -X POST http://127.0.0.1:4173/api/explain \
   -H 'Content-Type: application/json' \
   --data-binary @- <<'JSON'
 {
-  "language": "cpp",
-  "code": "int add(int a, int b) {\n    return a + b;\n}"
+  "language": "python",
+  "code": "def add(a, b):\n    return a + b\n"
 }
 JSON
 ```

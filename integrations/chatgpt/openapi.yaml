@@ -3,7 +3,7 @@ info:
   title: Code, Explained
   version: 0.1.0
   description: >
-    Turn small C++ programs into short technical stories for people who just
+    Turn small programs into short technical stories for people who just
     started programming. Alice is the action. Bobo is memory.
 servers:
   - url: https://code-explained-api.onrender.com
@@ -27,11 +27,12 @@ paths:
                     type: string
   /api/explain:
     post:
-      operationId: explainCpp
-      summary: Explain C++ as a mapped story
+      operationId: explainCode
+      summary: Explain code as a mapped story
       description: >
-        Send C++ source. The server syntax-checks it, then returns a summary
-        and one story sentence for every one or two meaningful lines.
+        Send source in any language. C and C++ are syntax-checked. Other
+        languages are read as written. Returns a summary and one story
+        sentence for every one or two meaningful lines.
       requestBody:
         required: true
         content:
@@ -40,15 +41,17 @@ paths:
               type: object
               additionalProperties: false
               required:
-                - language
                 - code
               properties:
                 language:
                   type: string
-                  enum: [cpp]
+                  description: Language name such as cpp, python, or javascript. Optional if the code or filename is enough to sniff.
+                filename:
+                  type: string
+                  description: Original filename, used to detect the language
                 code:
                   type: string
-                  description: The C++ source to explain
+                  description: The source to explain
       responses:
         "200":
           description: A story with line mappings
@@ -57,9 +60,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Explanation"
         "400":
-          description: Missing code or unsupported language
+          description: Missing code
         "422":
-          description: C++ syntax error
+          description: Syntax error in C or C++
         "502":
           description: Explanation provider failed
 components:

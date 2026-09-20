@@ -1,6 +1,7 @@
 import { collectMeaningfulLines, groupMeaningfulLines, validateExplanation } from "./groups.mjs";
-import { validateCppSyntax } from "./cpp.mjs";
+import { validateClangSyntax } from "./cpp.mjs";
 import { requestExplanation } from "./providers.mjs";
+import { clangLanguages, detectLanguage, languageLabel } from "../src/language.js";
 
 const maxBodyBytes = 100_000;
 
@@ -77,16 +78,12 @@ export async function handleApiRequest(request, response, prefix = "") {
 
   try {
     const body = await readJson(request);
-    if (body.language !== "cpp") {
-      sendJson(response, 400, {
-        message: "Version one understands C++ code only.",
-      });
-      return;
-    }
     if (typeof body.code !== "string" || !body.code.trim()) {
-      sendJson(response, 400, { message: "Paste some C++ code first." });
+      sendJson(response, 400, { message: "Paste some code first." });
       return;
     }
+
+    const language = detectLanguage(body.code, body.filename, body.language);
 
     const meaningfulLines = collectMeaningfulLines(body.code);
     const limit = Number(process.env.MAX_MEANINGFUL_LINES || 100);
@@ -97,45 +94,47 @@ export async function handleApiRequest(request, response, prefix = "") {
       return;
     }
 
-    let syntax;
-    try {
-      syntax = await validateCppSyntax(body.code);
-    } catch (error) {
-      sendJson(response, 503, {
-        kind: "validator_unavailable",
-        message:
-          "The C++ checker is unavailable. Make sure clang++ is installed.",
-        detail: error.message,
-      });
-      return;
+    if (clangLanguages.has(language)) {
+      let syntax;
+      try {
+        syntax = await validateClangSyntax(body.code, language);
+      } catch (error) {
+        sendJson(response, 503, {
+          kind: "validator_unavailable",
+          message: `The ${languageLabel(language)} checker is unavailable. Make sure clang is installed.`,
+          detail: error.message,
+        });
+        return;
+      }
+
+      if (!syntax.valid) {
+        const diagnostics = syntax.diagnostics.length
+          ? syntax.diagnostics
+          : [
+              {
+                line: 1,
+                column: 1,
+                message: "The checker found a problem.",
+                simpleMessage:
+                  "The computer found a problem in this code but could not point to one exact line.",
+              },
+            ];
+        sendJson(response, 422, {
+          kind: "syntax_error",
+          message: "The code needs a small fix before it can be explained.",
+          diagnostics,
+        });
+        return;
+      }
     }
 
-    if (!syntax.valid) {
-      const diagnostics = syntax.diagnostics.length
-        ? syntax.diagnostics
-        : [
-            {
-              line: 1,
-              column: 1,
-              message: "The C++ checker found a problem.",
-              simpleMessage:
-                "The computer found a problem in this code but could not point to one exact line.",
-            },
-          ];
-      sendJson(response, 422, {
-        kind: "syntax_error",
-        message: "The C++ code needs a small fix before it can be explained.",
-        diagnostics,
-      });
-      return;
-    }
-
-    const groups = groupMeaningfulLines(body.code);
-    const generated = await requestExplanation(body.code, groups);
+    const groups = groupMeaningfulLines(body.code, language);
+    const generated = await requestExplanation(body.code, groups, language);
     const explanation = validateExplanation(generated.result, groups);
 
     sendJson(response, 200, {
       ...explanation,
+      language,
       provider: generated.provider,
     });
   } catch (error) {

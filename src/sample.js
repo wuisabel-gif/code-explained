@@ -2,6 +2,7 @@ export const examples = [
   {
     id: "largest",
     title: "Example 1",
+    language: "cpp",
     filename: "example-1.cpp",
     focusId: "group-4",
     code: `#include <iostream>
@@ -22,6 +23,7 @@ int findLargest(const std::vector<int>& numbers) {
       summary:
         "This is a record hunt: Alice walks Bobo's locker of numbers, and Bobo keeps only the champion score in memory.",
       provider: "preview",
+      language: "cpp",
       explanations: [
         {
           groupId: "group-1",
@@ -59,35 +61,37 @@ int findLargest(const std::vector<int>& numbers) {
   {
     id: "swap",
     title: "Example 2",
-    filename: "example-2.cpp",
+    language: "python",
+    filename: "example-2.py",
     focusId: "group-2",
-    code: `void swapValues(int& alice, int& bobo) {
-    int cup = alice;
-    alice = bobo;
-    bobo = cup;
-}`,
+    code: `def swap_values(alice, bobo):
+    cup = alice
+    alice = bobo
+    bobo = cup
+    return alice, bobo`,
     explanation: {
       summary:
         "This scene is a safe trade: Alice and Bobo swap the integers they hold, using a spare cup so neither value is lost.",
       provider: "preview",
+      language: "python",
       explanations: [
         {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "swapValues is a void function, meaning it returns no souvenir, and the & marks mean Alice and Bobo are references to the original variables, not copies.",
+            "def swap_values opens a Python function, a chapter that takes Alice and Bobo and will hand both values back as a pair.",
         },
         {
           groupId: "group-2",
           lineNumbers: [2, 3],
           sentence:
-            "First the spare cup stores Alice's number, then Alice's slot is overwritten with Bobo's number, the classic three-step swap from every intro class.",
+            "First the spare cup stores Alice's number, then Alice's slot is overwritten with Bobo's number, the classic three-step swap.",
         },
         {
           groupId: "group-3",
-          lineNumbers: [4],
+          lineNumbers: [4, 5],
           sentence:
-            "Finally Bobo receives the cup, so the two original variables have traded values without dropping either one.",
+            "Bobo receives the cup, then return sends both names back so the two original values have traded places.",
         },
       ],
     },
@@ -95,9 +99,10 @@ int findLargest(const std::vector<int>& numbers) {
   {
     id: "winner",
     title: "Example 3",
-    filename: "example-3.cpp",
+    language: "javascript",
+    filename: "example-3.js",
     focusId: "group-2",
-    code: `int winner(int alice, int bobo) {
+    code: `function winner(alice, bobo) {
     if (alice > bobo) {
         return alice;
     }
@@ -107,12 +112,13 @@ int findLargest(const std::vector<int>& numbers) {
       summary:
         "This is a fork in the plot: Alice and Bobo compare scores, and only the larger integer continues.",
       provider: "preview",
+      language: "javascript",
       explanations: [
         {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "winner is a function that takes two ints, Alice's score and Bobo's score, and will return exactly one of them.",
+            "function winner is a JavaScript chapter that takes two numbers, Alice's score and Bobo's score, and will return exactly one of them.",
         },
         {
           groupId: "group-2",
@@ -132,25 +138,25 @@ int findLargest(const std::vector<int>& numbers) {
   {
     id: "highfives",
     title: "Example 4",
-    filename: "example-4.cpp",
+    language: "python",
+    filename: "example-4.py",
     focusId: "group-3",
-    code: `int highFives(int n) {
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        count = count + 1;
-    }
-    return count;
-}`,
+    code: `def high_fives(n):
+    count = 0
+    for i in range(n):
+        count = count + 1
+    return count`,
     explanation: {
       summary:
         "This chapter is a counter: Alice repeats a high-five n times while Bobo ticks a variable up from zero.",
       provider: "preview",
+      language: "python",
       explanations: [
         {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "highFives takes n, how many times the scene should repeat, and promises an int back: the total number of claps.",
+            "def high_fives takes n, how many times the scene should repeat, and promises a number back: the total number of claps.",
         },
         {
           groupId: "group-2",
@@ -162,11 +168,11 @@ int findLargest(const std::vector<int>& numbers) {
           groupId: "group-3",
           lineNumbers: [3, 4],
           sentence:
-            "The for loop is the repeating beat, i running from 0 until it hits n, and each pass adds 1 to count.",
+            "The for loop is the repeating beat, range(n) running Alice through n passes, and each pass adds 1 to count.",
         },
         {
           groupId: "group-4",
-          lineNumbers: [6],
+          lineNumbers: [5],
           sentence:
             "return count is the last line of the chapter, handing Bobo's tally back as the function's result.",
         },
@@ -176,36 +182,29 @@ int findLargest(const std::vector<int>& numbers) {
   {
     id: "wave",
     title: "Example 5",
-    filename: "example-5.cpp",
-    focusId: "group-3",
-    code: `#include <iostream>
-
-int main() {
-    std::cout << "Alice waves at Bobo.\\n";
-    return 0;
+    language: "javascript",
+    filename: "example-5.js",
+    focusId: "group-2",
+    code: `function main() {
+    console.log("Alice waves at Bobo.");
 }`,
     explanation: {
       summary:
-        "This is the opening scene of a C++ program: main starts, Alice prints a wave, and the process exits cleanly.",
+        "This is the opening scene of a program: main starts, Alice prints a wave, and the function ends.",
       provider: "preview",
+      language: "javascript",
       explanations: [
         {
           groupId: "group-1",
           lineNumbers: [1],
           sentence:
-            "#include <iostream> loads the standard input-output library so Alice can write text to the console with std::cout.",
+            "function main is the front door of this JavaScript story, the function a learner would call first.",
         },
         {
           groupId: "group-2",
-          lineNumbers: [3],
+          lineNumbers: [2],
           sentence:
-            "int main() is the front door of every C++ story, the function the operating system calls first.",
-        },
-        {
-          groupId: "group-3",
-          lineNumbers: [4, 5],
-          sentence:
-            "std::cout prints Alice's wave onto the screen, then return 0 tells the system the program finished with no error.",
+            "console.log prints Alice's wave onto the screen, a single beat of output and then the scene is over.",
         },
       ],
     },

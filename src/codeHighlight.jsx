@@ -1,8 +1,8 @@
 const keywordPattern =
-  /\b(auto|bool|break|case|catch|char|class|const|continue|default|delete|do|double|else|enum|false|float|for|if|int|long|namespace|new|nullptr|private|protected|public|return|short|signed|sizeof|static|std|string|struct|switch|template|this|throw|true|try|unsigned|using|vector|void|while)\b/g;
+  /\b(async|await|auto|bool|break|case|catch|char|class|const|continue|def|default|delete|do|double|elif|else|enum|except|export|false|finally|float|fn|for|from|func|function|if|import|in|int|lambda|let|long|namespace|new|None|null|nullptr|pass|print|private|protected|public|range|return|short|signed|sizeof|static|std|string|struct|switch|template|this|throw|true|try|typeof|undefined|unsigned|using|var|vector|void|while|with|yield)\b/g;
 
 const tokenPattern =
-  /(\/\/.*$|#include|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b)/gm;
+  /(#include\b[^\n]*|\/\/[^\n]*|#[^\n]*|`(?:\\.|[^`\\])*`|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b)/gm;
 
 export function highlightLine(line) {
   const parts = [];
@@ -15,9 +15,14 @@ export function highlightLine(line) {
 
     const value = match[0];
     let className = "token-number";
-    if (value.startsWith("//")) className = "token-comment";
-    else if (value === "#include") className = "token-preprocessor";
-    else if (value.startsWith('"') || value.startsWith("'")) {
+    if (value.startsWith("//") || (value.startsWith("#") && !value.startsWith("#include"))) {
+      className = "token-comment";
+    } else if (value.startsWith("#include")) className = "token-preprocessor";
+    else if (
+      value.startsWith('"') ||
+      value.startsWith("'") ||
+      value.startsWith("`")
+    ) {
       className = "token-string";
     }
 

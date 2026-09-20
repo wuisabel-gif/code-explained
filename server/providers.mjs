@@ -48,7 +48,7 @@ function parseOpenAIOutput(payload) {
   throw new Error("OpenAI returned no explanation.");
 }
 
-export async function explainWithOpenAI(code, groups) {
+export async function explainWithOpenAI(code, groups, language) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new ProviderError(
@@ -70,8 +70,8 @@ export async function explainWithOpenAI(code, groups) {
         model: process.env.OPENAI_MODEL || "gpt-5.6-luna",
         reasoning: { effort: "none" },
         store: false,
-        instructions: systemInstructions,
-        input: buildUserPrompt(code, groups),
+        instructions: systemInstructions(language),
+        input: buildUserPrompt(code, groups, language),
         max_output_tokens: 4_000,
         text: {
           verbosity: "low",
@@ -113,7 +113,7 @@ export async function explainWithOpenAI(code, groups) {
   }
 }
 
-export async function explainWithGemini(code, groups) {
+export async function explainWithGemini(code, groups, language) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new ProviderError(
@@ -136,12 +136,12 @@ export async function explainWithGemini(code, groups) {
       },
       body: JSON.stringify({
         systemInstruction: {
-          parts: [{ text: systemInstructions }],
+          parts: [{ text: systemInstructions(language) }],
         },
         contents: [
           {
             role: "user",
-            parts: [{ text: buildUserPrompt(code, groups) }],
+            parts: [{ text: buildUserPrompt(code, groups, language) }],
           },
         ],
         generationConfig: {
@@ -186,7 +186,7 @@ export async function explainWithGemini(code, groups) {
   }
 }
 
-export async function explainWithOllama(code, groups) {
+export async function explainWithOllama(code, groups, language) {
   const baseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434";
   let response;
 
@@ -199,8 +199,8 @@ export async function explainWithOllama(code, groups) {
         stream: false,
         format: explanationSchema,
         messages: [
-          { role: "system", content: systemInstructions },
-          { role: "user", content: buildUserPrompt(code, groups) },
+          { role: "system", content: systemInstructions(language) },
+          { role: "user", content: buildUserPrompt(code, groups, language) },
         ],
         options: { temperature: 0.2 },
       }),
@@ -235,13 +235,13 @@ export async function explainWithOllama(code, groups) {
   }
 }
 
-export async function requestExplanation(code, groups) {
+export async function requestExplanation(code, groups, language = "code") {
   const provider = (process.env.AI_PROVIDER || "openai").toLowerCase();
 
   if (provider === "ollama") {
     return {
       provider: "Ollama",
-      result: await explainWithOllama(code, groups),
+      result: await explainWithOllama(code, groups, language),
     };
   }
 
@@ -256,7 +256,7 @@ export async function requestExplanation(code, groups) {
   try {
     return {
       provider: "OpenAI",
-      result: await explainWithOpenAI(code, groups),
+      result: await explainWithOpenAI(code, groups, language),
     };
   } catch (openAIError) {
     if (openAIError.status === 502) throw openAIError;
@@ -264,7 +264,7 @@ export async function requestExplanation(code, groups) {
     try {
       return {
         provider: "Gemini fallback",
-        result: await explainWithGemini(code, groups),
+        result: await explainWithGemini(code, groups, language),
       };
     } catch (geminiError) {
       throw new AggregateError(

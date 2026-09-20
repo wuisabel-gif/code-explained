@@ -1,24 +1,43 @@
+import { detectLanguage, hashCommentLanguages } from "../src/language.js";
+
 const braceOnlyPattern = /^[{};]+$/;
-const commentPattern = /^(\/\/|\/\*|\*|\*\/)/;
-const preprocessorPattern = /^#/;
+const slashCommentPattern = /^(\/\/|\/\*|\*|\*\/)/;
+const preprocessorPattern = /^#\s*(include|define|pragma|if|ifdef|ifndef|endif|else|elif|undef|error|warning)\b/;
+const controlPattern =
+  /^(if|elif|else|for|while|switch|case|catch|except|try|with|match|when)\b/;
+const namedSignaturePattern =
+  /^(export\s+)?(public\s+|private\s+|protected\s+|async\s+|static\s+)*(def|class|function|fn|func)\b/;
+const bracedSignaturePattern = /\)\s*(const\s*)?\{\s*$/;
 
 export function isMeaningfulLine(line) {
   const trimmed = line.trim();
   return Boolean(trimmed) && !braceOnlyPattern.test(trimmed);
 }
 
-function lineKind(text) {
+function isComment(text, language) {
   const trimmed = text.trim();
-  if (commentPattern.test(trimmed)) return "comment";
+  if (slashCommentPattern.test(trimmed)) return true;
+  if (hashCommentLanguages.has(language) && trimmed.startsWith("#")) return true;
+  if (language === "code" && /^#(?!\s*(include|define|pragma|if|ifdef|ifndef))/.test(trimmed)) {
+    return true;
+  }
+  return false;
+}
+
+function lineKind(text, language) {
+  const trimmed = text.trim();
+  if (isComment(trimmed, language)) return "comment";
   if (preprocessorPattern.test(trimmed)) return "preprocessor";
-  if (/^(if|else|for|while|switch|case|catch)\b/.test(trimmed)) return "control";
-  if (/\)\s*(const\s*)?\{?\s*$/.test(trimmed)) return "signature";
+  if (controlPattern.test(trimmed)) return "control";
+  if (namedSignaturePattern.test(trimmed) || bracedSignaturePattern.test(trimmed)) {
+    return "signature";
+  }
   return "statement";
 }
 
-function canPair(first, second) {
-  const firstKind = lineKind(first.text);
-  const secondKind = lineKind(second.text);
+function canPair(first, second, language) {
+  const firstKind = lineKind(first.text, language);
+  const secondKind = lineKind(second.text, language);
 
   if (firstKind === "comment" || secondKind === "comment") return false;
   if (firstKind === "preprocessor" || secondKind === "preprocessor") {
@@ -38,7 +57,8 @@ export function collectMeaningfulLines(code) {
     .filter(({ text }) => isMeaningfulLine(text));
 }
 
-export function groupMeaningfulLines(code) {
+export function groupMeaningfulLines(code, language) {
+  const lang = language || detectLanguage(code);
   const meaningful = collectMeaningfulLines(code);
   const groups = [];
 
@@ -47,7 +67,7 @@ export function groupMeaningfulLines(code) {
     const next = meaningful[index + 1];
     const members = [current];
 
-    if (next && canPair(current, next)) {
+    if (next && canPair(current, next, lang)) {
       members.push(next);
       index += 1;
     }
