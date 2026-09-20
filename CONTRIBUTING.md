@@ -9,7 +9,7 @@
    npm ci
    ```
 
-3. Start the development server and open http://127.0.0.1:5173/:
+3. Start the development server and open <http://127.0.0.1:5173/>:
 
    ```sh
    npm run dev
