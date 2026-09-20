@@ -21,7 +21,12 @@
    npm run check
    ```
 
-5. Clang is needed for live C/C++ code reads and the C++ tests included in
-   `npm run check`. JavaScript-only development does not require it.
+5. Clang is needed for live C/C++ code reads and to pass `npm run check`.
+   JavaScript-only development can skip Clang and run:
+
+   ```sh
+   node --test tests/language.test.mjs tests/groups.test.mjs
+   npm run build
+   ```
 6. Never commit API keys or other secrets. Keep them in your local `.env` file,
    which is ignored by Git.
