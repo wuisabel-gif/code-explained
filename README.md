@@ -12,7 +12,7 @@ Paste or upload any code you have: Alice is the action. Bobo is memory. Each sen
 
 **OpenAI, inside the page.** A live read sends your code to the embedded OpenAI API and maps each sentence back to the source.
 
-![Example 1: code on the left, the story on the right](docs/screenshots/record-hunt.png)
+![Example 1: code on the left, the story on the right](docs/screenshots/example-1.png)
 
 ## Why a story helps
 
